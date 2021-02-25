@@ -14,9 +14,8 @@ const addPost = params => {
     posts.push([author, text, createdAt, categories]);
     return posts
    }
-   //posts = addPost ({post, autor:'', text:'',createdAt:'',categories: ['general'],['música'])
+
    /**
-    *
     * @param {Object} params
     * @param {Array} params.posts // The array of posts to modify
     * @param {String} params.author
@@ -27,11 +26,8 @@ const addPost = params => {
     * Función que servirá para editar la información de un post
     */
    const editPost = params => {
-    const { posts=[], author, text, createdAt, categories, index} =
-   params
-   
-    // Lógica
-   
+    const { posts=[], author, text, createdAt, categories, index} = params
+    posts [index]= ([author,text,createdAt,categories])
     return posts
    }
    /**
@@ -43,9 +39,8 @@ const addPost = params => {
     */
    const deletePost = params => {
     const { posts=[], index } = params
-   
+   delete posts[index]
     // Lógica
-   
     return posts
    }
    /**
@@ -57,9 +52,8 @@ const addPost = params => {
     */
    const getPost = params => {
     const {posts= [], index} = params
-   
+   console.log(posts[index]) //funciona pero me manda un error despues
     // Lógica
-   
     return post
    }
    /**
