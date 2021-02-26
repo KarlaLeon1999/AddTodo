@@ -11,7 +11,7 @@
 const addPost = params => {
     const { posts=[], author, text, createdAt, categories} = params
     // Lógica
-    posts.push([author, text, createdAt, categories]);
+    posts.push({author, text, createdAt, categories});
     return posts
    }
 
@@ -27,7 +27,7 @@ const addPost = params => {
     */
    const editPost = params => {
     const { posts=[], author, text, createdAt, categories, index} = params
-    posts [index]= ([author,text,createdAt,categories])
+    posts [index]= ({author,text,createdAt,categories})
     return posts
    }
    /**
@@ -52,9 +52,10 @@ const addPost = params => {
     */
    const getPost = params => {
     const {posts= [], index} = params
-   console.log(posts[index]) //funciona pero me manda un error despues
+   //return (posts[index]) //funciona pero solo para mandarlo a hacer una vez... no dos... checar
+   console.log (posts[index])//funcion ,aunque creo que el return esta de más
     // Lógica
-    return post
+    return posts
    }
    /**
     *
@@ -64,13 +65,33 @@ const addPost = params => {
    puede ordernar. Ej key: 'author'. key: 'createdAt'
     * Función que servirá para ordernar todos los posts
     */
-   const sortPosts = params => {
+   const sortPostsauthor = params => {
     const {posts = [], key} = params
-   
-    // Lógica
-   
-    return posts // Retornar el arreglo ordenado
-   }
+    posts.sort(function (a,b,key = 'author') {
+        if (a[key] > b[key]) {
+           return 1 
+        }
+        if (a[key] < b[key]) {
+            return -1
+        }
+        return 0
+    })
+    return posts
+    }
+    const sortPostscreatedAt = params => {
+        const {posts = [], key} = params
+        posts.sort(function (a,b,key = 'createdAt') {
+            if (a[key] > b[key]) {
+               return 1 
+            }
+            if (a[key] < b[key]) {
+                return -1
+            }
+            return 0
+        })
+        return posts
+        }
+
    /**
     *
     * @param {Object} params
@@ -84,9 +105,15 @@ const addPost = params => {
     */
    const filterPosts = params => {
     const {posts = [], categories = []} = params
-   
-    // Lógica
-   
+   var entradasInvalidas = 0
+   posts .filter(function (obj) {
+       if ('categories' in obj && obj.categories=== categories) {
+           return true;          
+       }else{
+       entradasInvalidas++
+       }
+   })
+   console.log ('numero de entradas Invalidas = ', entradasInvalidas)
     return posts // Retornar el arreglo con las categorías
    }
    
