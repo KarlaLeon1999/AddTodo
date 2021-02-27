@@ -1,3 +1,16 @@
+let posts = []
+let post1 = {
+ author: 'Nombre',
+ text: 'El texto del post. Puede ser muy largo o muy corto.',
+ createdAt:  new Date(2021, 0, 31),
+ categories: ['libros', 'correo'],
+}
+let post2={
+ author: 'Karla',
+ text: 'hola',
+ createdAt:  new Date(),
+ categories: ['general', 'música'],
+}
 /**
  * @param {Object} params
  * @param {Array} params.posts // The array of posts to modify
@@ -109,3 +122,15 @@ const filterPosts = params => {
             return posts // Retornar el arreglo con las categorías
         }
         //para ejecutar en consola chrome : posts = filterPosts ({posts,categories:['general','música']})
+const filteredPosts = params => {
+    const {posts = [], categories = []} = params
+    let postsCategories = [];
+        for (let i = 0; i < posts.length; i++) {
+            if (posts[i].categories.includes("libros","correo")) {
+                postsCategories.push(posts[i]);
+                }
+                }
+                console.log(postsCategories);
+            return posts // Retornar el arreglo con las categorías
+        }
+        //para ejecutar en consola chrome: posts = filteredPosts ({posts,categories:['libros','correo']})
