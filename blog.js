@@ -112,25 +112,13 @@ const sortPostscreatedAt = params => {
     */
 const filterPosts = params => {
     const {posts = [], categories = []} = params
-    let postsCategories = [];
-        for (let i = 0; i < posts.length; i++) {
-            if (posts[i].categories.includes("general","música")) {
-                postsCategories.push(posts[i]);
+    return posts.filter(post => {
+        for (let index = 0, lt = categories.length; index < lt; index++) {
+            const category = categories[index]
+            if (post.categories.includes(category)) {
+                return post
                 }
-                }
-                console.log(postsCategories);
-            return posts // Retornar el arreglo con las categorías
-        }
-        //para ejecutar en consola chrome : posts = filterPosts ({posts,categories:['general','música']})
-const filteredPosts = params => {
-    const {posts = [], categories = []} = params
-    let postsCategories = [];
-        for (let i = 0; i < posts.length; i++) {
-            if (posts[i].categories.includes("libros","correo")) {
-                postsCategories.push(posts[i]);
-                }
-                }
-                console.log(postsCategories);
-            return posts // Retornar el arreglo con las categorías
-        }
-        //para ejecutar en consola chrome: posts = filteredPosts ({posts,categories:['libros','correo']})
+            }
+        })
+    }
+     //para ejecutar en consola chrome: posts = filteredPosts ({posts,categories:['libros','correo']})
